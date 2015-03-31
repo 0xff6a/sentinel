@@ -1,6 +1,6 @@
 Sentinel
 ========
-
+[![Build Status](https://travis-ci.org/foxjerem/sentinel.svg?branch=master)](https://travis-ci.org/foxjerem/sentinel)
 [![Code Climate](https://codeclimate.com/github/foxjerem/sentinel/badges/gpa.svg)](https://codeclimate.com/github/foxjerem/sentinel)
 [![Test Coverage](https://codeclimate.com/github/foxjerem/sentinel/badges/coverage.svg)](https://codeclimate.com/github/foxjerem/sentinel)
 
