@@ -15,8 +15,7 @@ module Settings
       host    = DATA['elasticsearch']['host']
       port    = DATA['elasticsearch']['port']
 
-      raise "Cannot find Elasticsearch host. Please set it first" unless host
-      raise "Cannot find Elasticsearch port. Please set it first" unless port
+      raise "Cannot find Elasticsearch host or port. Please set them first" unless host && port
 
       new(host, port)
     end
@@ -28,9 +27,8 @@ module Settings
   end
 
   module_function
-  @elasticsearch_client = Elasticsearch.default
 
   def elasticsearch_client
-    @elasticsearch_client
+    Elasticsearch.default
   end
 end

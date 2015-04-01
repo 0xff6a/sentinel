@@ -18,4 +18,23 @@ describe LogData::Source do
       LogData::Source.from_settings
     end
   end
+
+  context 'Querying elasticsearch' do
+    it 'can get a list of available indices' do
+      expect(source.indices).to eq([
+        "logstash-2015.03.23", 
+        "logstash-2015.03.24", 
+        "logstash-2015.03.21", 
+        "logstash-2015.03.22", 
+        "logstash-2015.03.20"
+      ])
+    end
+
+    it 'can query elasticsearch using the default query' do
+      data = source.retrieve_default
+
+      expect(data['timed_out']).to be false
+      expect(data['hits']['total']).to be > 0
+    end
+  end
 end
