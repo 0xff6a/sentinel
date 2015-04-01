@@ -2,9 +2,11 @@ require 'elasticsearch'
 require 'settings'
 require 'json'
 
+require_relative 'query_builder'
+
 module LogData
   class Source
-    LOG_TYPE = /logstash/
+    INDEX_TYPE      = /logstash/
 
     attr_reader :client
 
@@ -23,38 +25,20 @@ module LogData
     end
 
     def indices
-      client
+      @client
         .perform_request('GET', '_stats/indices')
         .body['indices']
         .keys
-        .select { |i| i =~ LOG_TYPE}
+        .select { |i| i =~ INDEX_TYPE}
     end
 
     def retrieve_default
-      client.search({
+      @client.search({
         index: indices,
         body: {
-          query: default_query
+          query: QueryBuilder.default.query
         }
       })
-    end
-
-    private
-
-    def default_query
-      {
-        filtered: {
-          query:  { bool: { should: [{ query_string: { query: "*" }}] } },
-          filter: { bool: { must: [{ 
-                              range: { "@timestamp" => {
-                              from: 1425310414146,
-                              to: "now"
-                            }}},
-                              { fquery: { query: { query_string: { query: "type:(\"rails\")" } }, 
-                            }}]
-                          }
-                        }}
-      }
     end
   end
 end
