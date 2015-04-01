@@ -1,1 +1,4 @@
-elastic_search_url: http://not/here/yet
+elasticsearch:
+  host: 'http://54.72.179.212/'
+  port: 9200
+  scheme: 'http'
