@@ -8,20 +8,14 @@ module LogData
     def self.from_settings
       s = Settings.elasticsearch_client
       new( s.host,
-           s.port,
-           s.user,
-           s.pass,
-           s.scheme )
+           s.port )
     end
 
-    def initialize(host, port, user, pass, scheme)
-      @client = Elasticsearch::Client.new(hosts: [
-        { host: host,
+    def initialize(host, port)
+      @client = Elasticsearch::Client.new({ 
+          host: host,
           port: port,
-          user: user,
-          password: pass,
-          scheme: scheme
-        } ])
+        })
     end
   end
 end

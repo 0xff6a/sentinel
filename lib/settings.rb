@@ -11,30 +11,24 @@ module Settings
                 :port,
                 :scheme
 
-    def self.from_env
-      user    = ENV['ELASTIC_CLIENT_USER']
-      pass    = ENV['ELASTIC_CLIENT_PASS']
+    def self.default
       host    = DATA['elasticsearch']['host']
       port    = DATA['elasticsearch']['port']
-      scheme  = DATA['elasticsearch']['scheme']
 
       raise "Cannot find Elasticsearch host. Please set it first" unless host
       raise "Cannot find Elasticsearch port. Please set it first" unless port
 
-      new(host, port, user, pass, scheme)
+      new(host, port)
     end
 
-    def initialize(host, port, user, pass, scheme)
+    def initialize(host, port)
       @host   = host
       @port   = port
-      @user   = user
-      @pass   = pass
-      @scheme = scheme
     end
   end
 
   module_function
-  @elasticsearch_client = Elasticsearch.from_env
+  @elasticsearch_client = Elasticsearch.default
 
   def elasticsearch_client
     @elasticsearch_client
