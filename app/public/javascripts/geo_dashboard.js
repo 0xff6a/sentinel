@@ -137,14 +137,24 @@ $(document).ready( function() {
                 }
             ]
         }
-    ]
+    ];
 
-    new GMaps({
-      styles: styleArray,
-      div: '#geo_dashboard_map',
-      lat: 51.504435,
-      lng: -0.1291664
-    });
+   $.get( "/api/dashboards/geographical", function(response) {
+      var map = new GMaps({
+        styles: styleArray,
+        div: "#geo_dashboard_map",
+        lat: 51.504435,
+        lng: -0.1291664
+      });
+
+      response.data.forEach(function(location) {
+        map.addMarker({
+          lat: location.coord.lat,
+          lng: location.coord.lng
+        });
+      });
+      map.fitZoom();
+   });
   }
 });
 
