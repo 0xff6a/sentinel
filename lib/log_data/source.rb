@@ -1,7 +1,7 @@
 require 'elasticsearch'
-require 'settings'
 
 require_relative 'query_builder'
+require_relative '../settings'
 
 module LogData
   class Source
