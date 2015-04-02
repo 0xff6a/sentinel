@@ -5,11 +5,7 @@ module Settings
   DATA     = YAML::load_file(FILEPATH)
 
   class Elasticsearch
-    attr_reader :user,
-                :pass,
-                :host,
-                :port,
-                :scheme
+    attr_reader :host, :port
 
     def self.default
       host    = DATA['elasticsearch']['host']

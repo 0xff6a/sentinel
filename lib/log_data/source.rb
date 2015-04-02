@@ -7,21 +7,15 @@ require_relative 'query_builder'
 module LogData
   class Source
     INDEX_TYPE      = /logstash/
+    DEFAULT_FIELDS  = ["@timestamp"]
 
     attr_reader :client
 
     def self.from_settings
-      s = Settings.elasticsearch_client
-
-      new( s.host,
-           s.port )
-    end
-
-    def initialize(host, port)
-      @client = Elasticsearch::Client.new({ 
-          host: host,
-          port: port,
-        })
+      new( 
+        Settings.elasticsearch_client.host, 
+        Settings.elasticsearch_client.port 
+      )
     end
 
     def indices
@@ -32,13 +26,43 @@ module LogData
         .select { |i| i =~ INDEX_TYPE}
     end
 
-    def retrieve_default
+    def retrieve_all
+      retrieve(
+        indices,
+        QueryBuilder.default.query,
+        ["*"]
+      )
+    end
+
+    def retrieve_fields(fields)
+      retrieve(
+        indices,
+        QueryBuilder.default.query, 
+        DEFAULT_FIELDS + fields.map { |f| format_field(f) }
+      )
+    end
+
+    private
+
+    def initialize(host, port)
+      @client = Elasticsearch::Client.new({ 
+        host: host,
+        port: port,
+      })
+    end
+
+    def retrieve(indices, query, fields)
       @client.search({
         index: indices,
         body: {
-          query: QueryBuilder.default.query
+          _source: fields,
+          query: query
         }
       })
+    end
+
+    def format_field(f)
+      "@fields." + f.to_s
     end
   end
 end
