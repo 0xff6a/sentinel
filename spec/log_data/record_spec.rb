@@ -11,7 +11,7 @@ describe LogData::Record do
       expect(record.fields['ip']).to eq "178.255.153.2"
     end
 
-    it 'multiple records can be created from an ES client response' do
+    it 'multiple records can be created from a source client response' do
       records = LogData::Record.from_source(source)
 
       expect(records.count).to eq 4
