@@ -9,7 +9,7 @@ describe Tools::Geolocator do
       location = Tools::Geolocator.locate(ip)
 
       expect(location.ip).to eq '81.134.202.29'
-      expect(location.country_code).to eq 'GB'
+      expect(location.country).to eq 'GB'
       expect(location.lat).to eq 51.5
       expect(location.lng).to eq -0.13
     end

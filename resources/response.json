@@ -14,7 +14,7 @@
       "_type" : "rails",
       "_id" : "7d5fd148-8a0c-0252-a07c-4144f5abf470",
       "_score" : null,
-      "_source":{"@source":"logstasher","@tags":["dashboard"],"@fields":{"request_id":"c2dbef44-eeed-4d94-872f-024febf23f3c"},"@severity":"info","message":"Showing dashboard","@timestamp":"2015-03-24T13:30:08.111+00:00","@version":"1","type":"rails","project":"pq","appserver":"rails","version":"1.19.23","env":"prod","format":"json","host":"9bff165a3587","path":"/rails/log/logstash_production.json","@logstash_uuid":"7d5fd148-8a0c-0252-a07c-4144f5abf470"},
+      "_source":{"@source":"logstasher","@tags":["dashboard"],"@fields":{"request_id":"c2dbef44-eeed-4d94-872f-024febf23f3c", "ip":"85.17.156.11"},"@severity":"info","message":"Showing dashboard","@timestamp":"2015-03-24T13:30:08.111+00:00","@version":"1","type":"rails","project":"pq","appserver":"rails","version":"1.19.23","env":"prod","format":"json","host":"9bff165a3587","path":"/rails/log/logstash_production.json","@logstash_uuid":"7d5fd148-8a0c-0252-a07c-4144f5abf470"},
       "sort" : [ 1427203808111, 1427203808111 ]
     }, {
       "_index" : "logstash-2015.03.24",

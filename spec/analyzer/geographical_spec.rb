@@ -8,7 +8,11 @@ describe Analyzer::Geographical do
     it 'should return a count of access by country code given a list of records' do
       result = Analyzer::Geographical.activity_by_country(records)
 
-      expect(result).to eq({ "GB" => 4})
+      expect(result).to eq({ 
+        "GB" => 1,
+        "NL" => 2,
+        "US" => 1
+      })
     end
   end
 end

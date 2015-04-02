@@ -49,7 +49,7 @@ module Tools
     end
 
     class IPLocation
-      attr_reader :ip, :country_code, :lat, :lng
+      attr_reader :ip, :country, :lat, :lng
 
       def self.from_api(response)
         data = JSON.parse(response)
@@ -62,11 +62,11 @@ module Tools
         )
       end
 
-      def initialize(ip, country_code, lat, lng)
-        @ip           = ip
-        @country_code = country_code
-        @lat          = lat
-        @lng          = lng
+      def initialize(ip, country, lat, lng)
+        @ip      = ip
+        @country = country
+        @lat     = lat
+        @lng     = lng
       end
     end
   end
