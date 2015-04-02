@@ -1,6 +1,5 @@
 require 'elasticsearch'
 require 'settings'
-require 'json'
 
 require_relative 'query_builder'
 
