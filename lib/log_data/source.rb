@@ -55,7 +55,8 @@ module LogData
         index: indices,
         body: {
           _source: fields,
-          query: query
+          query: query,
+          size: 100 # Set as 100 to simplify testing and development
         }
       })
     end

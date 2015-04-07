@@ -36,8 +36,8 @@ module Analyzer
 
     def activity_by_ip(records)
       records.reduce({}) do |result, record|
-        ip = record.fields['ip']
-
+        ip = record.fields['ip'] 
+        
         if result.has_key?(ip)
           (result[ip] += 1) && result
         else
