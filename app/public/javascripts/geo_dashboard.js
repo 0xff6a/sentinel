@@ -149,8 +149,8 @@ $(document).ready( function() {
 
       response.data.forEach(function(location) {
         map.addMarker({
-          lat: location.coord.lat,
-          lng: location.coord.lng
+          lat: location.ip_location.lat,
+          lng: location.ip_location.lng
         });
       });
       map.fitZoom();

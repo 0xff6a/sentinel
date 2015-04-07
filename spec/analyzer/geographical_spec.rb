@@ -6,7 +6,7 @@ describe Analyzer::Geographical do
 
   context '#activity_by_country' do
     it 'should return a count of access by country code given a list of records' do
-      result = Analyzer::Geographical.activity_by_country(records)
+      result = Analyzer::Geographical.access_count_by(:country, records)
 
       expect(result).to eq({ 
         "GB" => 1,

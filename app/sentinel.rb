@@ -13,13 +13,9 @@ class Sentinel < Sinatra::Base
   end
 
   get '/api/dashboards/geographical' do
-    data            = LogData::Record.from_source(
-                        LogData::Source.from_settings.retrieve_fields([:ip])
-                      )
-    @access_coords  = Analyzer::Geographical.activity_by_coords(data)
-    @access_coords.map!(&:to_json)
+    access_data = Presenters::GeographicalReport.default
 
-    json({ status: '200', data: @access_coords })
+    json({ status: '200', data: access_data })
   end
 
   # start the server if ruby file executed directly
