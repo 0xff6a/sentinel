@@ -3,7 +3,7 @@ module Presenters
     module_function
 
     def default
-      es        =  LogData::Source.from_settings.retrieve_fields([:ip]
+      es        =  LogData::Source.from_settings.retrieve_fields([:ip])
       records   =  LogData::Record.from_source(source)
       raw_data  =  Analyzer::Geographical.access_data(es_records)
       

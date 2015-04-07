@@ -2,6 +2,7 @@ language: ruby
 env:
   global:
     - CODECLIMATE_REPO_TOKEN=3a8c7e85e1858b80b3e4920adf4a748839bb951eebfa779e9307de9aaa3ca8b2
+    - TEST_FRAMEWORK=travis
 rvm:
   - 2.1.2
 script:
