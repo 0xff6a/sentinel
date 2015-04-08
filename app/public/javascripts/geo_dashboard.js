@@ -139,14 +139,14 @@ $(document).ready( function() {
         }
     ];
 
-   $.get( "/api/dashboards/geographical", function(response) {
-      var map = new GMaps({
-        styles: styleArray,
-        div: "#geo_dashboard_map",
-        lat: 51.504435,
-        lng: -0.1291664
-      });
+    var map = new GMaps({
+      styles: styleArray,
+      div: "#geo_dashboard_map",
+      lat: 51.504435,
+      lng: -0.1291664
+    });
 
+    $.get( "/api/dashboards/geographical", function(response) {
       response.data.forEach(function(location) {
         map.addMarker({
           lat: location.ip_location.lat,
@@ -154,7 +154,7 @@ $(document).ready( function() {
         });
       });
       map.fitZoom();
-   });
+    });
   }
 });
 

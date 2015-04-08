@@ -25,7 +25,14 @@ describe LogData::QueryBuilder do
 
   context '#query' do
     it 'outputs a full ES query as json' do
+      es_query = {:body=>{ 
+        :_source=> ["@timestamp", "@fields.ip"], 
+        :query=>{:filtered=>{:query=>{:bool=>{:should=>[{:query_string=>{:query=>"*"}}]}}, 
+        :filter=>{:bool=>{:must=>[{:range=>{:@timestamp=>{:from=>query_s.time_from, :to=>"now"}}}, 
+        {:fquery=>{:query=>{:query_string=>{:query=>"type:(\"rails\")"}}}}]}}}}, :size=>25}
+      }
 
+      expect(builder.query).to eq es_query
     end
   end                                     
 end
