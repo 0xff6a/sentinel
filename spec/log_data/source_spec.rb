@@ -21,13 +21,13 @@ describe LogData::Source do
 
   context 'Querying elasticsearch', exclude: (ENV['TEST_FRAMEWORK'] == 'travis')  do
     it 'can get a list of available indices' do
-      expect(source.indices).to eq([
+      expect(source.indices).to include(
         "logstash-2015.03.23", 
         "logstash-2015.03.24", 
         "logstash-2015.03.21", 
         "logstash-2015.03.22", 
         "logstash-2015.03.20"
-      ])
+      )
     end
 
     it 'can query elasticsearch using the default query' do

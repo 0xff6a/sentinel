@@ -4,7 +4,7 @@ describe Analyzer::Geographical do
   let(:source)  { JSON.parse(File.read('resources/response.json'))  }
   let(:records) { LogData::Record.from_source(source)               }
 
-  context '#activity_by_country' do
+  xcontext '#activity_by_country' do
     it 'should return a count of access by country code given a list of records' do
       result = Analyzer::Geographical.access_count_by(:country, records)
 
