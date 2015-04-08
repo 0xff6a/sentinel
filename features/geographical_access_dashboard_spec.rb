@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Geographical Access Dashboard' do
+feature 'Geographical Access Dashboard', js: true do
   scenario 'A user can view a map of access to the application' do
     visit '/dashboards/geographical'
 

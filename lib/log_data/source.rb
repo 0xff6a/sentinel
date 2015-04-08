@@ -26,19 +26,11 @@ module LogData
     end
 
     def retrieve_all
-      retrieve(
-        indices,
-        QueryBuilder.default.query,
-        ["*"]
-      )
+      retrieve(indices, ["*"])
     end
 
     def retrieve_fields(fields)
-      retrieve(
-        indices,
-        QueryBuilder.default.query, 
-        DEFAULT_FIELDS + fields.map { |f| format_field(f) }
-      )
+      retrieve(indices, fields)
     end
 
     private
@@ -50,19 +42,11 @@ module LogData
       })
     end
 
-    def retrieve(indices, query, fields)
-      @client.search({
-        index: indices,
-        body: {
-          _source: fields,
-          query: query,
-          size: 100 # Set as 100 to simplify testing and development
-        }
-      })
-    end
-
-    def format_field(f)
-      "@fields." + f.to_s
+    def retrieve(indices, fields)
+      @client.search(
+        { index: indices }
+        .merge(QueryBuilder.basic(fields).query)
+      )
     end
   end
 end

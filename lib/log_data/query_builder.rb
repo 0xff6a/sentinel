@@ -1,35 +1,43 @@
+require_relative 'query_string'
+
 module LogData
   class QueryBuilder
-    DEFAULT_WINDOW_DAYS = 30
+    DEFAULT_FIELDS  = ["@timestamp"]
+    DEFAULT_SIZE    = 100
 
-    def self.default
-      default_start = (Time.now - (DEFAULT_WINDOW_DAYS * 24 * 60 * 60)).to_i
-      new(default_start, "now", "*")  
+    attr_reader :fields, :query_s, :size
+
+    def self.basic(fields)
+      new(
+        fields,
+        QueryString.default,             
+        DEFAULT_SIZE
+      )
     end
 
-    def self.custom
+    def self.custom(fields, query_params, size)
     end
 
-    def initialize(time_from, time_to, query_string)
-      @time_from     = time_from
-      @time_to       = time_to
-      @query_string  = query_string
+    def initialize(fields, query_s, size)
+      @fields  = DEFAULT_FIELDS + fields.map { |f| format_field(f) }
+      @query_s = query_s
+      @size    = size
     end
 
     def query
       {
-        filtered: {
-          query:  { bool: { should: [{ query_string: { query: @query_string }}] } },
-          filter: { bool: { must: [{ 
-              range: { :@timestamp => {
-              from: @time_from,
-              to: @time_to
-            }}},
-              { fquery: { query: { query_string: { query: "type:(\"rails\")" } }, 
-            }}]
-          }
-        }}
+        body: {
+          _source: fields,
+          query: query_s.to_json,
+          size: size
+        }
       }
+    end
+
+    private
+
+    def format_field(f)
+      "@fields." + f.to_s
     end
   end
 end
