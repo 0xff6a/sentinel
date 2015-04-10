@@ -19,7 +19,7 @@ describe LogData::Source do
     end
   end
 
-  context 'Querying elasticsearch', exclude: (ENV['TEST_FRAMEWORK'] == 'travis')  do
+  context 'Querying elasticsearch', exclude: travis_run?  do
     it 'can get a list of available indices' do
       expect(source.indices).to include(
         "logstash-2015.03.23", 

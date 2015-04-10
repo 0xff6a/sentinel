@@ -1,6 +1,6 @@
 module LogData
   class QueryString
-    DEFAULT_WINDOW_DAYS = 30
+    DEFAULT_WINDOW_DAYS = 10
 
     attr_reader :time_from, :time_to, :text
 

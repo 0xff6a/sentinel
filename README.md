@@ -7,6 +7,7 @@ Sentinel
 A log auditor / visualizer to detect malicious or suspicious activity patterns in web application access. Powered by the elastic search API.
 
 ## TODO:
+* Get app to use a source defined in settings (using template pattern to implement)
 * Size markers based on access count and display IP on hover
 * Set maximum size on single ES query of 500 records
 * Throw error if single query returns more than 500 records
