@@ -1,3 +1,7 @@
 elasticsearch:
   host: 'http://54.72.179.212'
   port: 9200
+
+mock_api:
+  host: 'http://localhost'
+  port: 6666

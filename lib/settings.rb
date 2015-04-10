@@ -22,7 +22,29 @@ module Settings
     end
   end
 
+  class MockAPI
+    attr_reader :host, :port
+
+    def self.default
+      host    = DATA['mock_api']['host']
+      port    = DATA['mock_api']['port']
+
+      raise "Cannot find Mock API host or port. Please set them first" unless host && port
+
+      new(host, port)
+    end
+
+    def initialize(host, port)
+      @host   = host
+      @port   = port
+    end
+  end
+
   module_function
+
+  def mock_api
+    MockAPI.default
+  end
 
   def elasticsearch_client
     Elasticsearch.default

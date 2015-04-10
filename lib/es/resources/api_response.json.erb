@@ -1,0 +1,18 @@
+{
+  "took" : 0,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : "<%= @total %>",
+    "max_score" : null,
+    "hits" : [
+      <% @records.each do |record| %>
+        <%= erb :'_record.json', locals: { record: record } %>
+      <% end %>
+     ]
+  }
+}

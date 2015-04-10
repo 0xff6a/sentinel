@@ -1,0 +1,36 @@
+{
+  "_index" : "logstash-2015.03.24",
+  "_type" : "rails",
+  "_id" : "b06517e8-6061-5156-5459-d094b79e747e",
+  "_score" : null,
+  "_source":
+  {
+    "@source":"logstasher",
+    "@tags":["request"],
+    "@fields":
+    {
+      "method":"<%= record.method %>",
+      "path":"<%= record.path %>",
+      "format":"html",
+      "controller":"root",
+      "action":"index",
+      "status":0,
+      "duration":0.45,
+      "ip":"<%= record.ip %>",
+      "route":"root#index",
+      "request_id":"adcac23f-a7a8-4775-a29a-fe767a60a971"
+    },
+    "@timestamp":"<%= record.timestamp %>",
+    "@version":"1",
+    "type":"rails",
+    "project":"pq",
+    "appserver":"rails",
+    "version":"1.19.23",
+    "env":"prod",
+    "format":"json",
+    "host":"9bff165a3587",
+    "path":"/rails/log/logstash_production.json",
+    "@logstash_uuid":"b06517e8-6061-5156-5459-d094b79e747e"
+  },
+  "sort" : [ 1427203781192, 1427203781192 ]
+}
