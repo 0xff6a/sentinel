@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe LogData::Source do
-  let(:source)    { LogData::Source.from_settings                        }
-  let(:settings)  { YAML::load_file(Settings::FILEPATH)['elasticsearch'] }
+  let(:source)    { LogData::Source.from_settings  }
+  let(:settings)  { Settings.elasticsearch_client  }
 
   context 'Setup' do
     it 'should create an instance of the Elasticsearch client' do

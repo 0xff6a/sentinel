@@ -47,6 +47,18 @@ end
 RSpec.configure do |config|
 
   config.include Capybara::DSL
+
+  # Start mock API server instance
+  mock_api_runner = ES::MockApiServerRunner.new
+
+  config.before(:suite) do
+    mock_api_runner.start
+  end
+
+  # Shut down mock API instance
+  config.after(:suite) do
+    mock_api_runner.stop
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

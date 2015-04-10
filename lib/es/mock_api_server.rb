@@ -9,7 +9,7 @@ module ES
     configure do
       set :lock, true
       set :root, File.dirname(__FILE__)
-      set :views, Proc.new { File.join(root, 'resources') }
+      set :views, Proc.new { File.join(root, 'templates') }
     end
 
     get '/' do

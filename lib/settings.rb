@@ -1,52 +1,23 @@
 require 'yaml'
 
 module Settings
-  FILEPATH = File.expand_path('../settings.yml', __dir__)
-  DATA     = YAML::load_file(FILEPATH)
+  path  = File.expand_path('../settings.yml', __dir__)
+  @data = YAML::load_file(path)
 
-  class Elasticsearch
-    attr_reader :host, :port
-
-    def self.default
-      host    = DATA['elasticsearch']['host']
-      port    = DATA['elasticsearch']['port']
-
-      raise "Cannot find Elasticsearch host or port. Please set them first" unless host && port
-
-      new(host, port)
-    end
-
-    def initialize(host, port)
-      @host   = host
-      @port   = port
-    end
-  end
-
-  class MockAPI
-    attr_reader :host, :port
-
-    def self.default
-      host    = DATA['mock_api']['host']
-      port    = DATA['mock_api']['port']
-
-      raise "Cannot find Mock API host or port. Please set them first" unless host && port
-
-      new(host, port)
-    end
-
-    def initialize(host, port)
-      @host   = host
-      @port   = port
+  Api = Struct.new(:name, :host, :port) do
+    def initialize(*args)
+      super(*args)
+      raise "Cannot find #{name} host or port. Please set them first" unless host && port
     end
   end
 
   module_function
 
   def mock_api
-    MockAPI.default
+    Api.new('Mock API', @data['mock_api']['host'], @data['mock_api']['port'])
   end
 
   def elasticsearch_client
-    Elasticsearch.default
+    Api.new('Elasticsearch Client', @data['elasticsearch']['host'], @data['elasticsearch']['port'])
   end
 end

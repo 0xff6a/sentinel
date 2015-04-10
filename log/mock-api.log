@@ -1,8 +1,4 @@
-127.0.0.1 - - [10/Apr/2015:12:02:50 +0100] "GET / HTTP/1.1" 200 32 0.0117
-127.0.0.1 - - [10/Apr/2015:12:03:11 +0100] "GET / HTTP/1.1" 200 32 0.0009
-127.0.0.1 - - [10/Apr/2015:12:03:29 +0100] "GET / HTTP/1.1" 200 32 0.0008
-127.0.0.1 - - [10/Apr/2015:12:03:42 +0100] "GET /_stats/indices HTTP/1.1" 200 - 0.0008
-127.0.0.1 - - [10/Apr/2015:12:03:52 +0100] "GET /reset HTTP/1.1" 404 525 0.0010
 Thin web server (v1.6.3 codename Protein Powder)
 Maximum connections set to 1024
-Listening on localhost:6666, CTRL+C to stop
+Listening on 0.0.0.0:6666, CTRL+C to stop
+Stopping ...

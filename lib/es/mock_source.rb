@@ -1,10 +1,18 @@
 require 'uri'
 require 'net/http'
+require 'json'
 
 require_relative '../settings'
 
 module ES
   class MockSource
+    ERR_TO_CATCH = 
+    [
+      Net::ReadTimeout, 
+      Errno::ECONNREFUSED, 
+      SocketError
+    ]
+
     attr_reader :host, :port
 
     def self.from_settings
@@ -19,14 +27,44 @@ module ES
       @port = port
     end
 
+    def available?
+      res = request("#{host}:#{port}/")
+
+      res.code =~ /^2/ ? true : false
+
+      rescue *ERR_TO_CATCH
+        false
+    end
+
     def retrieve(n)
-      Net::HTTP.get(retrieval_uri)
+      res = request("#{host}:#{port}/retrieve/#{n}")
+
+      if res.code =~ /^2/
+        JSON.parse(res.body)
+      else 
+        raise MockAPIFailure
+      end
+
+      rescue *ERR_TO_CATCH
+        raise MockAPIFailure
     end
 
     private
 
-    def retrieval_uri(n)
-      URI.parse("#{host}:#{port}/retrieve/#{n}") 
+    def request(uri_s)
+      uri = URI.parse(uri_s)
+
+      Net::HTTP.start(uri.host, uri.port) do |http|
+        req = Net::HTTP::Get.new(uri)
+        http.request(req) 
+      end
+    end
+
+    class MockAPIFailure < StandardError
+      def initialize
+        super('Mock ES API failed to respond as expected')
+      end
     end
   end
 end
+
