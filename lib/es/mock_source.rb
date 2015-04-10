@@ -16,11 +16,6 @@ module ES
       )
     end
 
-    def initialize(host, port)
-      @host = host
-      @port = port
-    end
-
     def available?
       res = request("#{host}:#{port}/")
 
@@ -44,6 +39,11 @@ module ES
     end
 
     private
+
+    def initialize(host, port)
+      @host = host
+      @port = port
+    end
 
     def request(uri_s)
       uri = URI.parse(uri_s)
