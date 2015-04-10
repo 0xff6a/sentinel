@@ -1,7 +1,7 @@
 require 'codeclimate-test-reporter'
 require 'pry'
 
-CodeClimate::TestReporter.start
+# CodeClimate::TestReporter.start
 
 Dir[File.join(__dir__, '../lib', '/*/*.rb')].each {|file| require file }
 

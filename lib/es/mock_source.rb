@@ -3,16 +3,10 @@ require 'net/http'
 require 'json'
 
 require_relative '../settings'
+require_relative '../data_source'
 
 module ES
-  class MockSource
-    ERR_TO_CATCH = 
-    [
-      Net::ReadTimeout, 
-      Errno::ECONNREFUSED, 
-      SocketError
-    ]
-
+  class MockSource < DataSource
     attr_reader :host, :port
 
     def self.from_settings

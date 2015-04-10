@@ -19,25 +19,22 @@ describe LogData::Source do
     end
   end
 
-  context 'Querying elasticsearch', exclude: travis_run?  do
-    it 'can get a list of available indices' do
-      expect(source.indices).to include(
-        "logstash-2015.03.23", 
-        "logstash-2015.03.24", 
-        "logstash-2015.03.21", 
-        "logstash-2015.03.22", 
-        "logstash-2015.03.20"
-      )
+  context 'Methods' do
+    it '#available? - check if the API is available' do
+      expect(source.available?).to be true 
+
+      allow(source.client).to receive(:perform_request).and_raise(Errno::ECONNREFUSED)
+      expect(source.available?).to be false
     end
 
-    it 'can query elasticsearch using the default query' do
+    it '#retrieve_all - retrieve all fields query' do
       data = source.retrieve_all
 
       expect(data['timed_out']).to be false
       expect(data['hits']['total']).to be > 0
     end
 
-    it 'can retrieve only specific fields' do
+    it '#retrieve_fields - retrieve only specific fields in a query' do
       data    = source.retrieve_fields([:ip])
       fields  = data['hits']['hits'].first['_source']
       

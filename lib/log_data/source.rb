@@ -2,9 +2,10 @@ require 'elasticsearch'
 
 require_relative 'query_builder'
 require_relative '../settings'
+require_relative '../data_source'
 
 module LogData
-  class Source
+  class Source < DataSource
     INDEX_TYPE      = /logstash/
     DEFAULT_FIELDS  = ["@timestamp"]
 
@@ -17,12 +18,12 @@ module LogData
       )
     end
 
-    def indices
-      @client
-        .perform_request('GET', '_stats/indices')
-        .body['indices']
-        .keys
-        .select { |i| i =~ INDEX_TYPE}
+    def available?
+      res = @client.perform_request('GET', '_cat/indices?v')
+      res.status == 200 ? true : false
+
+      rescue *ERR_TO_CATCH
+        false
     end
 
     def retrieve_all
@@ -34,6 +35,14 @@ module LogData
     end
 
     private
+
+    def indices
+      @client
+        .perform_request('GET', '_stats/indices')
+        .body['indices']
+        .keys
+        .select { |i| i =~ INDEX_TYPE}
+    end
 
     def initialize(host, port)
       @client = Elasticsearch::Client.new({ 
