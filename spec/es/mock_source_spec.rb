@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'spec_helper'
 
 describe ES::MockSource do
   let(:src)       { ES::MockSource.from_settings  } 

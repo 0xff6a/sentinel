@@ -17,6 +17,12 @@ describe LogData::Source do
 
       LogData::Source.from_settings
     end
+
+    it 'it can handle API errors' do
+      allow(source.client).to receive(:perform_request).and_raise(SocketError)
+
+      expect { source.retrieve_all }.to raise_error(LogData::Source::ElasticsearchClientError)
+    end
   end
 
   context 'Methods' do

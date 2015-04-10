@@ -42,6 +42,9 @@ module LogData
         .body['indices']
         .keys
         .select { |i| i =~ INDEX_TYPE}
+
+      rescue *ERR_TO_CATCH
+        raise ElasticsearchClientError
     end
 
     def initialize(host, port)
@@ -56,6 +59,15 @@ module LogData
         { index: indices }
         .merge(QueryBuilder.basic(fields).query)
       )
+
+      rescue *ERR_TO_CATCH
+        raise ElasticsearchClientError
+    end
+
+    class ElasticsearchClientError < StandardError
+      def initialize
+        super('Elastic Search Client failed to respond as expected')
+      end
     end
   end
 end
