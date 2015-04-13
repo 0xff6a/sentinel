@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LogData::Source do
+describe LogData::Source, exclude: travis_run? do
   let(:source)    { LogData::Source.from_settings  }
   let(:settings)  { Settings.elasticsearch_client  }
 
