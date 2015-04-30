@@ -150,7 +150,10 @@ $(document).ready( function() {
       response.data.forEach(function(location) {
         map.addMarker({
           lat: location.ip_location.lat,
-          lng: location.ip_location.lng
+          lng: location.ip_location.lng,
+          infoWindow: {
+            content: ('<p>' + location.ip_location.ip + '</p>')
+          }
         });
       });
       map.fitZoom();
