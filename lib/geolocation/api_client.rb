@@ -3,15 +3,10 @@ require 'json'
 
 require_relative '../ip_location'
 
-module Tools
-  module Geolocator
+module Geolocation
+  module ApiClient
     module_function
     BASE_URL = 'http://freegeoip.net/json/'
-
-    def bulk_locate(ips)
-      # TODO: make this a lot cleverer to handle many IPs!
-      ips.map { |ip|  locate(ip) }
-    end
 
     def locate(ip)
       res = call_api(ip)

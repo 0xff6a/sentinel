@@ -28,7 +28,7 @@ describe Analyzer::Geographical do
     end
 
     it 'can be built from an ip and a count' do
-      allow(Tools::Geolocator).to receive(:locate).with(ip).and_return(ip_location)
+      allow(Geolocation::Service).to receive(:locate).with(ip).and_return(ip_location)
       data_point = Analyzer::Geographical::AccessCount.build_from(ip, 2)
 
       expect(data_point.ip_location).to eq ip_location

@@ -1,5 +1,3 @@
-require_relative '../tools/geolocator'
-
 module Analyzer
   module Geographical
     module_function
@@ -21,7 +19,7 @@ module Analyzer
       attr_reader :ip_location, :count
 
       def self.build_from(ip, count)
-        new(Tools::Geolocator.locate(ip), count)
+        new(Geolocation::Service.locate(ip), count)
       end
 
       def initialize(ip_location, count)
