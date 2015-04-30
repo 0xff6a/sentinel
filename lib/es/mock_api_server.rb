@@ -21,9 +21,17 @@ module ES
       '[+] ES::MockApiServer reset successful'
     end
 
-    get '/retrieve/:n' do |n|
-      @records = ES::MockRecordBuilder.random(n.to_i)
-      @total   = n
+    get '/retrieve_all' do
+      @records = ES::MockRecordBuilder.random
+
+      RECORDS  << @records
+
+      erb :'api_response.json'
+    end
+
+    get '/retrieve_fields/:fields' do |fields|
+      @records = ES::MockRecordBuilder.random(fields.split(':'))
+      
       RECORDS  << @records
 
       erb :'api_response.json'

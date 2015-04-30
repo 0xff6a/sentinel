@@ -30,7 +30,7 @@ class DataSource
     raise NotImplementedError, 'The retrieve_all method should be implemented by subclasses'
   end
 
-  def retrieve_fields
+  def retrieve_fields(fields)
     #
     # Returns an ES JSON response for a given list of fields 
     # Array[Symbol] -> JSON

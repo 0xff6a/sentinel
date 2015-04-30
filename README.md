@@ -6,13 +6,8 @@ Sentinel
 
 A log auditor / visualizer to detect malicious or suspicious activity patterns in web application access. Powered by the elastic search API.
 
-## TODO:
-* Get app to use a source defined in settings (using template pattern to implement)
-* Size markers based on access count and display IP on hover
-* Set maximum size on single ES query of 500 records
-* Throw error if single query returns more than 500 records
-* Figure out ES query pagination
-* Refactor analytics engine
+## Project Board
 
+Hosted on Trello @ https://trello.com/b/4J2GG1ir/sentinel (only accessible by MoJ DS)
 
 [NB: This repository is a work in progress]

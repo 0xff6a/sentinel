@@ -7,19 +7,7 @@
   {
     "@source":"logstasher",
     "@tags":["request"],
-    "@fields":
-    {
-      "method":"<%= record.method %>",
-      "path":"<%= record.path %>",
-      "format":"html",
-      "controller":"root",
-      "action":"index",
-      "status":0,
-      "duration":0.45,
-      "ip":"<%= record.ip %>",
-      "route":"root#index",
-      "request_id":"adcac23f-a7a8-4775-a29a-fe767a60a971"
-    },
+    "@fields":<%= record.fields_to_json %>,
     "@timestamp":"<%= record.timestamp %>",
     "@version":"1",
     "type":"rails",

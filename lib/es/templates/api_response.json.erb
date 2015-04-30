@@ -7,12 +7,13 @@
     "failed" : 0
   },
   "hits" : {
-    "total" : "<%= @total %>",
+    "total" : "<%= @records.count.to_s %>",
     "max_score" : null,
     "hits" : [
-      <% @records.each do |record| %>
-        <%= erb :'_record.json', locals: { record: record } %>
+      <% @records[0...-1].each do |record| %>
+        <%= erb :'_record.json', locals: { record: record } %>, 
       <% end %>
+      <%= erb :'_record.json', locals: { record: @records[-1] } %> 
      ]
   }
 }

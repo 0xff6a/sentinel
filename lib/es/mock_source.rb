@@ -25,14 +25,20 @@ module ES
         false
     end
 
-    def retrieve(n)
-      res = request("#{host}:#{port}/retrieve/#{n}")
+    def retrieve_all
+      res = request("#{host}:#{port}/retrieve_all")
 
-      if res.code =~ /^2/
-        JSON.parse(res.body)
-      else 
+      handle_reponse(res)
+
+      rescue *ERR_TO_CATCH
         raise MockAPIFailure
-      end
+    end
+
+    def retrieve_fields(fields)
+      fields = fields.join(':')
+      res    = request("#{host}:#{port}/retrieve_fields/#{fields}")
+
+      handle_reponse(res)
 
       rescue *ERR_TO_CATCH
         raise MockAPIFailure
@@ -51,6 +57,14 @@ module ES
       Net::HTTP.start(uri.host, uri.port) do |http|
         req = Net::HTTP::Get.new(uri)
         http.request(req) 
+      end
+    end
+
+    def handle_reponse(res)
+      if res.code =~ /^2/
+        JSON.parse(res.body)
+      else 
+        raise MockAPIFailure
       end
     end
 

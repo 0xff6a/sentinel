@@ -1,33 +1,22 @@
+require_relative 'mock_record'
+
 module ES
   module MockRecordBuilder
     module_function
-    MockRecord = Struct.new(:timestamp, :method, :path, :ip)
+    DEFAULT_SIZE   = 10
 
-    def random(n)
-      (1..n).to_a.map{ |_| random_record }
+    def random(fields = [])
+      (1..DEFAULT_SIZE).to_a.map{ |_| random_record(fields) }
     end
 
     private_class_method
 
-    def random_record
-      MockRecord.new(
-        random_timestamp,
-        'GET',
-        '/',
-        random_ip
-      )
-    end
-
-    def random_timestamp
-      (DateTime.now - ( 30 * rand() )).to_s
-    end 
-
-    def random_ip
-      "#{random_octet}.#{random_octet}.#{random_octet}.#{random_octet}"
-    end
-
-    def random_octet
-      (rand * 252).to_i
+    def random_record(fields)
+      if fields.empty?
+        ES::MockRecord.default 
+      else
+        ES::MockRecord.with_fields(fields.map(&:to_sym))
+      end
     end
   end
 end

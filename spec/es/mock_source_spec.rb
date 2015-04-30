@@ -17,7 +17,7 @@ describe ES::MockSource do
     it 'can handle mock API errors' do
       allow_any_instance_of(Net::HTTP).to receive(:request).and_raise(Errno::ECONNREFUSED)
 
-      expect { src.retrieve(10) }.to raise_error(ES::MockSource::MockAPIFailure)
+      expect { src.retrieve_all }.to raise_error(ES::MockSource::MockAPIFailure)
     end
   end
 
@@ -29,18 +29,24 @@ describe ES::MockSource do
       expect(src.available?).to be false
     end
 
-    xit '#retrieve_all - retrieve all fields query' do
-      data    = src.retrieve(1)
+    it '#retrieve_all - retrieve all fields query' do
+      data    = src.retrieve_all
       records = LogData::Record.from_source(data)
 
-      expect(records.count).to be 1
+      expect(records.count).to be ES::MockRecordBuilder::DEFAULT_SIZE
       expect(records.all? { |record|
         record.is_a?(LogData::Record) && 
         record.fields['ip'] =~ /\b(?:\d{1,3}\.){3}\d{1,3}\b/
       })
     end
 
-    xit '#retrieve_fields - retrieve only specific fields in a query' do
+    it '#retrieve_fields - retrieve only specific fields in a query' do
+      data    = src.retrieve_fields([:ip])
+      fields  = data['hits']['hits'].first['_source']
+      
+      expect(fields['@timestamp']).not_to be nil
+      expect(fields['@fields']['ip']).to match /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
+      expect(fields['@fields']['duration']).to be nil
     end
   end
 end

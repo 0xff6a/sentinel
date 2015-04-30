@@ -1,23 +1,19 @@
 require 'spec_helper'
 
 describe ES::MockRecordBuilder do
-  let(:ip_regex) { /\b(?:\d{1,3}\.){3}\d{1,3}\b/ }
+  let(:size) { ES::MockRecordBuilder::DEFAULT_SIZE }
 
-  it 'can create a random MockRecord object' do
-    rec = ES::MockRecordBuilder.random(1).first
-    
-    expect(rec.path).to eq '/'
-    expect(rec.method).to eq 'GET'
-    expect(rec.ip).to match ip_regex
-    expect(DateTime.parse(rec.timestamp)).to be_an_instance_of DateTime 
+  it 'can build an array of random MockRecord objects with default fields' do
+    expect(ES::MockRecord).to receive(:default).exactly(size).times
+    recs = ES::MockRecordBuilder.random
+    expect(recs.size).to eq size
   end
 
-  it 'can build an array of random MockRecord objects' do
-    recs = ES::MockRecordBuilder.random(10)
-
-    expect(recs.size).to eq 10
-    expect(recs.all? { |record|
-      record.ip =~ ip_regex
-    }).to be true
+  it 'can build an array of random MockRecord objects with specified fields' do
+    fields = [:ip, :duration]
+    
+    expect(ES::MockRecord).to receive(:with_fields).with(fields).exactly(size).times
+    recs = ES::MockRecordBuilder.random(fields)
+    expect(recs.size).to eq size
   end
 end
