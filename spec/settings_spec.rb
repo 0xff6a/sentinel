@@ -18,4 +18,10 @@ describe Settings do
       expect(mock_settings.port).to eq 6666
     end
   end
+
+  context 'Geolocation' do
+    it 'should contain the default cache size' do
+      expect(Settings.geolocation.default_cache_size).to eq 10000
+    end
+  end
 end

@@ -2,7 +2,7 @@ module Geolocation
   module Service
     extend self
 
-    DEFAULT_CACHE_SIZE = 1000
+    CACHE_SIZE = Settings.geolocation.default_cache_size
 
     def locate(ip)
       cached_result = cache[ip]
@@ -25,7 +25,7 @@ module Geolocation
     end
 
     def cache
-      @cache ||= Geolocation::Cache.new(DEFAULT_CACHE_SIZE)
+      @cache ||= Geolocation::Cache.new(CACHE_SIZE)
     end
   end
 end

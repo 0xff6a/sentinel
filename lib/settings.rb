@@ -20,4 +20,8 @@ module Settings
   def elasticsearch_client
     Api.new('Elasticsearch Client', @data['elasticsearch']['host'], @data['elasticsearch']['port'])
   end
+
+  def geolocation
+    OpenStruct.new(@data['geolocation'])
+  end
 end

@@ -5,3 +5,6 @@ elasticsearch:
 mock_api:
   host: 'http://localhost'
   port: 6666
+
+geolocation:
+  default_cache_size: 10000
