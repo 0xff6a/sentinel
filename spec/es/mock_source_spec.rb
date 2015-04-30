@@ -31,7 +31,7 @@ describe ES::MockSource do
 
     it '#retrieve_all - retrieve all fields query' do
       data    = src.retrieve_all
-      records = LogData::Record.from_source(data)
+      records = LogData::Record.from_es_data(data)
 
       expect(records.count).to be ES::MockRecordBuilder::DEFAULT_SIZE
       expect(records.all? { |record|

@@ -12,7 +12,7 @@ describe LogData::Record do
     end
 
     it 'multiple records can be created from a source client response' do
-      records = LogData::Record.from_source(source)
+      records = LogData::Record.from_es_data(source)
 
       expect(records.count).to eq 4
       expect(

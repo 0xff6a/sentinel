@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LogData::Source, exclude: travis_run? do
+describe LogData::Source do
   let(:source)    { LogData::Source.from_settings  }
   let(:settings)  { Settings.elasticsearch_client  }
 
@@ -25,7 +25,7 @@ describe LogData::Source, exclude: travis_run? do
     end
   end
 
-  context 'Methods' do
+  context 'Methods', exclude: travis_run? do
     it '#available? - check if the API is available' do
       expect(source.available?).to be true 
 

@@ -2,8 +2,8 @@ module LogData
   class Record
     attr_reader :timestamp, :fields
 
-    def self.from_source(response)
-      raw_records = response['hits']['hits']
+    def self.from_es_data(json)
+      raw_records = json['hits']['hits']
       raw_records.map { |raw| new(raw['_source']) }
     end
     

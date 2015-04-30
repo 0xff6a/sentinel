@@ -1,7 +1,7 @@
 require 'yaml'
 
 module Settings
-  path  = File.expand_path('../settings.yml', __dir__)
+  path  = File.expand_path('../config/settings.yml', __dir__)
   @data = YAML::load_file(path)
 
   Api = Struct.new(:name, :host, :port) do

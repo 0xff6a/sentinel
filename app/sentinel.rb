@@ -1,9 +1,18 @@
 require 'sinatra/base'
 require 'sinatra/json'
 
+# Require lib files
 Dir[File.join(__dir__, '../lib', '/*/*.rb')].each {|file| require file }
 
 class Sentinel < Sinatra::Base
+  configure :test, :development do
+    DataSource = ES::MockSource
+  end
+
+  configure :production do
+    DataSource = LogData::Source
+  end
+
   get '/' do
     'Hello Sentinel World'
   end
