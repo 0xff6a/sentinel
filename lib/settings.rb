@@ -24,4 +24,8 @@ module Settings
   def geolocation
     OpenStruct.new(@data['geolocation'])
   end
+
+  def geolocation_api
+    Api.new('IP Geolocation API', ENV['GEO_API_HOST'], ENV['GEO_API_PORT'].to_i)
+  end
 end

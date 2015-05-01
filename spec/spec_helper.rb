@@ -35,7 +35,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 
   # Start mock API server instance
-  mock_api_runner = ES::MockApiServerRunner.new
+  mock_api_runner = MockApi::Runner.new
 
   config.before(:suite) do
     mock_api_runner.start

@@ -3,13 +3,13 @@ require 'uri'
 
 require_relative '../settings'
 
-module ES
-  class MockApiServerRunner
+module MockApi
+  class Runner
     HOST               = Settings.mock_api.host
     PORT               = Settings.mock_api.port 
     PID_FILEPATH       = File.expand_path('../../tmp/mock_api_server.pid', __dir__)
     LOG_FILEPATH       = File.expand_path('../../log/mock-api.log', __dir__)
-    RACK_CONFIG_PATH   = File.expand_path('./mock-api-config.ru', __dir__)
+    RACK_CONFIG_PATH   = File.expand_path('./config.ru', __dir__)
     CWD                = File.expand_path('../../', __dir__)
     HEARTBEAT_ENDPOINT = '/'
 

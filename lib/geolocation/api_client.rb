@@ -6,7 +6,8 @@ require_relative '../ip_location'
 module Geolocation
   module ApiClient
     module_function
-    BASE_URL = 'http://freegeoip.net/json/'
+    HOST = Settings.geolocation_api.host
+    PORT = Settings.geolocation_api.port 
 
     def locate(ip)
       res = call_api(ip)
@@ -27,8 +28,14 @@ module Geolocation
 
     private_class_method
 
+    def build_uri(ip)
+      uri      = URI.parse(HOST + '/' + ip.to_s)
+      uri.port = PORT
+      uri
+    end
+
     def call_api(ip)
-      uri = URI.parse(BASE_URL + ip.to_s)
+      uri = build_uri(ip)
 
       Net::HTTP.start(uri.host, uri.port) do |http|
         req = Net::HTTP::Get.new(uri)

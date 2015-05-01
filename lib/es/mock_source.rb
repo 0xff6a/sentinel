@@ -26,7 +26,7 @@ module ES
     end
 
     def retrieve_all
-      res = request("#{host}:#{port}/retrieve_all")
+      res = request("#{host}:#{port}/es/retrieve_all")
 
       handle_reponse(res)
 
@@ -36,7 +36,7 @@ module ES
 
     def retrieve_fields(fields)
       fields = fields.join(':')
-      res    = request("#{host}:#{port}/retrieve_fields/#{fields}")
+      res    = request("#{host}:#{port}/es/retrieve_fields/#{fields}")
 
       handle_reponse(res)
 

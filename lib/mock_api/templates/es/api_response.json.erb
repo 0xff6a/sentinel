@@ -11,9 +11,9 @@
     "max_score" : null,
     "hits" : [
       <% @records[0...-1].each do |record| %>
-        <%= erb :'_record.json', locals: { record: record } %>, 
+        <%= erb :'es/_record.json', locals: { record: record } %>, 
       <% end %>
-      <%= erb :'_record.json', locals: { record: @records[-1] } %> 
+      <%= erb :'es/_record.json', locals: { record: @records[-1] } %> 
      ]
   }
 }

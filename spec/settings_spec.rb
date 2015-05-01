@@ -19,6 +19,15 @@ describe Settings do
     end
   end
 
+  context 'Geolocation API' do
+    it 'should contain the geolocation api server port and host' do
+      mock_settings  = Settings.geolocation_api
+
+      expect(mock_settings.host).to eq 'http://localhost/geolocation'
+      expect(mock_settings.port).to eq 6666
+    end
+  end
+
   context 'Geolocation' do
     it 'should contain the default cache size' do
       expect(Settings.geolocation.cache_size).to eq 1000

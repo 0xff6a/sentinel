@@ -3,7 +3,10 @@ env:
   global:
     - CODECLIMATE_REPO_TOKEN=3a8c7e85e1858b80b3e4920adf4a748839bb951eebfa779e9307de9aaa3ca8b2
     - TEST_FRAMEWORK=travis
+    - GEO_API_HOST=http://localhost/geolocation
+    - GEO_API_PORT=6666
 rvm:
   - 2.1.2
 script:
   - bundle exec rspec spec
+  - bundle exec rspec features
