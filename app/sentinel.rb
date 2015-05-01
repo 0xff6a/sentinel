@@ -15,7 +15,7 @@ class Sentinel < Sinatra::Base
 
   configure :production, :development do
     DataSource = LogData::Source
-    Geolocation::Service.load_cache!
+    Geolocation::Service.start!
   end
 
   get '/' do

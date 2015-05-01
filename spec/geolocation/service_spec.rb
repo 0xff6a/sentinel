@@ -33,7 +33,16 @@ describe Geolocation::Service do
     end
   end
 
-  context 'File IO' do
+  context 'Cache management' do
+    it '#start! - start a regular cache dump and loads the cache' do
+      expect(service).to receive(:load_cache!)
+      expect_any_instance_of(Object).to receive(:sleep).with(Settings.geolocation.cache_dump_interval)
+      expect(service).to receive(:dump_cache).at_least(:once)
+
+      service.start!
+    end
+
+
     it '#dump_cache - dumps cache contents to a YAML file' do
       service.cache.fill({ ip => location })
       service.dump_cache
@@ -41,7 +50,7 @@ describe Geolocation::Service do
       file_data = File.read(cache_file)
 
       expect(file_data).to eq(
-         "--- !ruby/object:Geolocation::Cache\n" +
+         "--- !ruby/object:Cache\n" +
          "max_size: 1000\n" +
          "data:\n" +
          "  184.75.209.18: !ruby/object:RSpec::Mocks::Double\n" +

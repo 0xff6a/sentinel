@@ -1,9 +1,12 @@
+require_relative '../cache'
+
 module Geolocation
   module Service
     extend self
 
-    CACHE_FILE = File.join(File.dirname(__FILE__), '../../', Settings.geolocation.cache_file)
-    CACHE_SIZE = Settings.geolocation.cache_size
+    CACHE_FILE          = File.join(File.dirname(__FILE__), '../../', Settings.geolocation.cache_file)
+    CACHE_SIZE          = Settings.geolocation.cache_size
+    CACHE_DUMP_INTERVAL = Settings.geolocation.cache_dump_interval
 
     def locate(ip)
       cached_result = cache[ip]
@@ -14,6 +17,17 @@ module Geolocation
         result    = api_client.locate(ip)
         cache[ip] = result
         result
+      end
+    end
+
+    def start!
+      load_cache!
+      
+      Thread.new do 
+        loop do
+          sleep CACHE_DUMP_INTERVAL
+          dump_cache
+        end
       end
     end
 
@@ -29,7 +43,7 @@ module Geolocation
 
     def load_cache!
       if File.exists?(CACHE_FILE)
-        @cache = Geolocation::Cache.from_dumpfile(CACHE_FILE)
+        @cache = Cache.from_dumpfile(CACHE_FILE)
       else
         warn 'No cache dump file present!'
       end
@@ -46,7 +60,7 @@ module Geolocation
     end
 
     def cache
-      @cache ||= Geolocation::Cache.new(CACHE_SIZE)
+      @cache ||= Cache.new(CACHE_SIZE)
     end
   end
 end

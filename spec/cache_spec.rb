@@ -1,7 +1,8 @@
 require 'spec_helper'
+require 'cache'
 
-describe Geolocation::Cache do
-  let(:cache) { Geolocation::Cache.new(3) }
+describe Cache do
+  let(:cache) { Cache.new(3) }
 
   context 'Initialisation' do
     it 'is initialized with a max size' do
@@ -46,7 +47,7 @@ describe Geolocation::Cache do
   end
 
   context 'File IO' do
-    let(:filepath) { File.expand_path('../../tmp/cache.yml', __dir__) }
+    let(:filepath) { File.expand_path('../tmp/cache.yml', __dir__) }
 
     before(:each) do
       cache.fill({item_1: '1', item_2: '2'})
@@ -57,7 +58,7 @@ describe Geolocation::Cache do
       result = File.read(filepath)
 
       expect(result).to eq(
-        "--- !ruby/object:Geolocation::Cache\n" +
+        "--- !ruby/object:Cache\n" +
         "max_size: 3\n" +
         "data:\n" +
         "  :item_1: '1'\n" +
@@ -66,7 +67,7 @@ describe Geolocation::Cache do
     end
 
     it 'can be created from a YAML dump file' do
-      new_cache = Geolocation::Cache.from_dumpfile(filepath)
+      new_cache = Cache.from_dumpfile(filepath)
 
       expect(new_cache.max_size).to eq 3
       expect(new_cache.to_a).to eq([
