@@ -19,10 +19,12 @@ module Geolocation
 
     def clear_cache!
       cache.clear!
+      self
     end
 
     def clear_dump!
       File.delete(CACHE_FILE) if File.exists?(CACHE_FILE)
+      self
     end
 
     def load_cache!
@@ -31,10 +33,12 @@ module Geolocation
       else
         warn 'No cache dump file present!'
       end
+      self
     end
 
     def dump_cache
       @cache.dump_to_file(CACHE_FILE)
+      self
     end
 
     def api_client

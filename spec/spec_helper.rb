@@ -3,10 +3,10 @@ require 'pry'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
-# CodeClimate::TestReporter.start
+CodeClimate::TestReporter.start
 
 Dir[File.join(__dir__, '../lib', '/*/*.rb')].each {|file| require file }
-require File.join(File.dirname(__FILE__), '../', 'sentinel.rb')
+require File.join(File.dirname(__FILE__), '../', 'app/sentinel.rb')
 
 ENV['RACK_ENV'] = 'test'
 
@@ -29,6 +29,7 @@ Capybara.register_driver :poltergeist do |app|
     }
     Capybara::Poltergeist::Driver.new(app, options)
 end
+
 RSpec.configure do |config|
 
   config.include Capybara::DSL

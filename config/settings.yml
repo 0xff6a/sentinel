@@ -9,3 +9,4 @@ mock_api:
 geolocation:
   cache_size: 1000
   cache_file: '/tmp/ip_location_cache.yml'
+  cache_dump_interval: 60
