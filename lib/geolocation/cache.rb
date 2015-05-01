@@ -1,8 +1,12 @@
+require 'yaml'
+
 module Geolocation
   class Cache
-    # TODO: dump cache to file when shutting down gracefully
-    # TODO: initialize cache from file at boot time
     attr_reader :max_size
+
+    def self.from_dumpfile(filepath)
+      YAML.load(File.read(filepath))
+    end
 
     def initialize(max_size)
       raise ArgumentError if max_size < 1
@@ -39,6 +43,10 @@ module Geolocation
       raise ArgumentError if data_h.size > @max_size
 
       data_h.each { |k, v| self[k] = v }
+    end
+
+    def dump_to_file(filepath)
+      File.write(filepath, YAML.dump(self))
     end
 
     def to_a

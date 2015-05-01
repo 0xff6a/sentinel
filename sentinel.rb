@@ -3,14 +3,19 @@ require 'sinatra/json'
 
 # Require lib files
 Dir[File.join(__dir__, '../lib', '/*/*.rb')].each {|file| require file }
-
+  
 class Sentinel < Sinatra::Base
+  configure do
+    set :root, File.dirname(__FILE__)
+  end
+
   configure :test do
     DataSource = ES::MockSource
   end
 
   configure :production, :development do
     DataSource = LogData::Source
+    Geolocation::Service.load_cache!
   end
 
   get '/' do

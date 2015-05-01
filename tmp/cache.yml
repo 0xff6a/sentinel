@@ -1,0 +1,5 @@
+--- !ruby/object:Geolocation::Cache
+max_size: 3
+data:
+  :item_1: '1'
+  :item_2: '2'

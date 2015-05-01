@@ -7,4 +7,5 @@ mock_api:
   port: 6666
 
 geolocation:
-  default_cache_size: 10000
+  cache_size: 1000
+  cache_file: '/tmp/ip_location_cache.yml'

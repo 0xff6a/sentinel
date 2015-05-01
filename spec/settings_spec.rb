@@ -21,7 +21,11 @@ describe Settings do
 
   context 'Geolocation' do
     it 'should contain the default cache size' do
-      expect(Settings.geolocation.default_cache_size).to eq 10000
+      expect(Settings.geolocation.cache_size).to eq 1000
+    end
+
+    it 'should containt the cache filepath' do
+      expect(Settings.geolocation.cache_file).to eq '/tmp/ip_location_cache.yml'
     end
   end
 end

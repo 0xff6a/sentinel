@@ -6,7 +6,7 @@ require 'capybara/poltergeist'
 # CodeClimate::TestReporter.start
 
 Dir[File.join(__dir__, '../lib', '/*/*.rb')].each {|file| require file }
-require File.join(File.dirname(__FILE__), '../app', 'sentinel.rb')
+require File.join(File.dirname(__FILE__), '../', 'sentinel.rb')
 
 ENV['RACK_ENV'] = 'test'
 

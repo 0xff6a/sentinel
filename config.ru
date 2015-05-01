@@ -1,3 +1,3 @@
-require File.join(File.dirname(__FILE__), 'app/sentinel.rb')
+require File.join(File.dirname(__FILE__), 'sentinel.rb')
 
 run Sentinel
