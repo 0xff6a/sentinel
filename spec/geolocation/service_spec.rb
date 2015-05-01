@@ -34,15 +34,6 @@ describe Geolocation::Service do
   end
 
   context 'Cache management' do
-    it '#start! - start a regular cache dump and loads the cache' do
-      expect(service).to receive(:load_cache!)
-      expect_any_instance_of(Object).to receive(:sleep).with(Settings.geolocation.cache_dump_interval)
-      expect(service).to receive(:dump_cache).at_least(:once)
-
-      service.start!
-    end
-
-
     it '#dump_cache - dumps cache contents to a YAML file' do
       service.cache.fill({ ip => location })
       service.dump_cache
