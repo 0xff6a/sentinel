@@ -50,7 +50,7 @@ module MockApi
     # ===================================================================================
     
     get '/geolocation/:ip' do |ip|
-      @ip = ip
+      @ip  = ip
       @lat = random_lat
       @lng = random_lng
 

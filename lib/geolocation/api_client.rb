@@ -6,6 +6,7 @@ require_relative '../ip_location'
 module Geolocation
   module ApiClient
     module_function
+    
     HOST = Settings.geolocation_api.host
     PORT = Settings.geolocation_api.port 
 

@@ -139,11 +139,24 @@ $(document).ready( function() {
         }
     ];
 
-    var map = new GMaps({
-      styles: styleArray,
-      div: "#geo_dashboard_map",
-      lat: 51.504435,
-      lng: -0.1291664
+    var hq_lat      = 51.504435,
+        hq_lng      = -0.1291664,
+        hq_icon     = '/images/hq.png',
+        access_icon = '/images/access.png',
+        map         = new GMaps({
+                        styles: styleArray,
+                        div: "#geo_dashboard_map",
+                        lat: hq_lat,
+                        lng: hq_lng
+                      });
+
+    map.addMarker({
+      lat: hq_lat,
+      lng: hq_lng,
+      infoWindow: {
+        content: ('<p>MoJ</p>')
+      },
+      icon: hq_icon
     });
 
     $.get( "/api/dashboards/geographical", function(response) {
@@ -153,7 +166,15 @@ $(document).ready( function() {
           lng: location.ip_location.lng,
           infoWindow: {
             content: ('<p>' + location.ip_location.ip + '</p>')
-          }
+          },
+          icon: access_icon
+        });
+
+        map.drawPolyline({
+          path: [[hq_lat, hq_lng], [location.ip_location.lat, location.ip_location.lng]],
+          strokeColor: '#ffff00',
+          strokeOpacity: 0.6,
+          strokeWeight: 6
         });
       });
       map.fitZoom();
