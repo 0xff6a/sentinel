@@ -32,44 +32,4 @@ describe Geolocation::Service do
       expect(result).to eq location
     end
   end
-
-  context 'Cache management' do
-    it '#dump_cache - dumps cache contents to a YAML file' do
-      service.cache.fill({ ip => location })
-      service.dump_cache
-
-      file_data = File.read(cache_file)
-
-      expect(file_data).to eq(
-         "--- !ruby/object:Cache\n" +
-         "max_size: 1000\n" +
-         "data:\n" +
-         "  184.75.209.18: !ruby/object:RSpec::Mocks::Double\n" +
-         "    __expired: false\n" +
-         "    name: !ruby/class 'IPLocation'\n"
-      )
-    end
-
-    it '#load_cache! - loads ip location data from a YAML dump file' do
-      service.cache.fill({ ip => 'a location' })
-      service.dump_cache
-      service.clear_cache!
-
-      expect(service.cache.count).to eq 0
-      
-      service.load_cache!
-      expect(service.cache.to_a).to eq([
-        [ ip, 'a location' ]
-      ])
-    end
-
-    it 'if the cache file is not present it warns and does not modify the cache' do
-      service.cache.fill({ ip => 'some other location' })
-      
-      expect{ service.load_cache! }.to output("No cache dump file present!\n").to_stderr
-      expect(service.cache.to_a).to eq([
-        [ ip, 'some other location' ]
-      ])
-    end
-  end
 end
