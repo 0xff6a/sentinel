@@ -5,7 +5,7 @@ module LogData
     attr_reader :time_from, :time_to, :text
 
     def self.default
-      default_start = (Time.now - (DEFAULT_WINDOW_DAYS * 24 * 60 * 60)).to_i
+      default_start = (Time.now - (DEFAULT_WINDOW_DAYS * 24 * 60 * 60)).to_i * 1000
       new(default_start, 'now', '*')  
     end
 

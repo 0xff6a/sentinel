@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe LogData::QueryString do   
-  let(:start_time) { (Time.now - (LogData::QueryString::DEFAULT_WINDOW_DAYS * 24 * 60 * 60)).to_i }
-  let(:query_s)    { LogData::QueryString.new(start_time, 'now', 'attribute')                     }
+  let(:start_time) { (Time.now - (LogData::QueryString::DEFAULT_WINDOW_DAYS * 24 * 60 * 60)).to_i * 1000 }
+  let(:query_s)    { LogData::QueryString.new(start_time, 'now', 'attribute')                            }
 
   context 'Setup' do
     it 'can be initialized with a start time, end time and text' do

@@ -4,14 +4,7 @@ module Analyzer
 
     def activity_by_ip(records)
       records.reduce({}) do |result, record|
-        return result unless record.fields
-        ip = record.fields['ip']
-        
-        if result.has_key?(ip)
-          (result[ip] += 1) && result
-        else
-          result.merge({ip => 1}) 
-        end
+        record.fields ? update(result, record) : result
       end
     end
 
@@ -32,6 +25,18 @@ module Analyzer
           "ip_location" => ip_location.to_json,
           "count"       => count,
         }
+      end
+    end
+
+    private_class_method
+
+    def update(result, record)
+      ip = record.fields['ip']
+      
+      if result.has_key?(ip)
+        (result[ip] += 1) && result
+      else
+        result.merge({ip => 1}) 
       end
     end
   end

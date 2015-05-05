@@ -3,7 +3,7 @@ require_relative 'query_string'
 module LogData
   class QueryBuilder
     DEFAULT_FIELDS  = ["@timestamp"]
-    DEFAULT_SIZE    = 200
+    DEFAULT_SIZE    = 1000
 
     attr_reader :fields, :query_s, :size
 

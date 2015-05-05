@@ -12,14 +12,15 @@ module Geolocation
       @cache ||= Cache.new(CACHE_SIZE)
     end
 
-    def start!
-      load_cache!
-      cache.add_observer(self)
-    end
-
     def update
       dump_cache if (Time.now - update_time) > CACHE_DUMP_INTERVAL 
       @update_time = Time.now
+    end
+
+    def start!
+      load_cache!
+      cache.add_observer(self)
+      self
     end
 
     def clear_cache!
@@ -43,7 +44,6 @@ module Geolocation
 
     def dump_cache
       @cache.dump_to_file(CACHE_FILE)
-      self
     end
 
     private
