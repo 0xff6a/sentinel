@@ -62,10 +62,6 @@ class Cache
     array.reverse!
   end
 
-  def delete(key)
-    @data.delete(key)
-  end
-
   def clear!
     @data.clear
     notify_change
@@ -77,6 +73,10 @@ class Cache
   end
 
   private
+
+  def delete(key)
+    @data.delete(key)
+  end
 
   def notify_change
     changed

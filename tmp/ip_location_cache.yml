@@ -1,56 +1,11 @@
 --- !ruby/object:Cache
 max_size: 1000
 data:
-  188.138.124.110: !ruby/object:IPLocation
-    ip: 188.138.124.110
-    country: DE
-    lat: 51
-    lng: 9
-  108.62.115.226: !ruby/object:IPLocation
-    ip: 108.62.115.226
-    country: US
-    lat: 33.675
-    lng: -111.952
   85.17.156.11: !ruby/object:IPLocation
     ip: 85.17.156.11
     country: NL
     lat: 52.374
     lng: 4.89
-  94.247.174.83: !ruby/object:IPLocation
-    ip: 94.247.174.83
-    country: SE
-    lat: 56.898
-    lng: 12.502
-  178.255.153.2: !ruby/object:IPLocation
-    ip: 178.255.153.2
-    country: CH
-    lat: 47.367
-    lng: 8.55
-  199.87.228.66: !ruby/object:IPLocation
-    ip: 199.87.228.66
-    country: US
-    lat: 45.517
-    lng: -122.681
-  72.46.130.42: !ruby/object:IPLocation
-    ip: 72.46.130.42
-    country: US
-    lat: 36.088
-    lng: -115.149
-  94.46.240.121: !ruby/object:IPLocation
-    ip: 94.46.240.121
-    country: ES
-    lat: 40.4
-    lng: -3.684
-  184.75.209.18: !ruby/object:IPLocation
-    ip: 184.75.209.18
-    country: CA
-    lat: 43.667
-    lng: -79.417
-  96.31.66.245: !ruby/object:IPLocation
-    ip: 96.31.66.245
-    country: US
-    lat: 27.999
-    lng: -82.516
   222.186.56.21: !ruby/object:IPLocation
     ip: 222.186.56.21
     country: CN
@@ -71,6 +26,66 @@ data:
     country: ''
     lat: 47
     lng: 8
+  72.46.130.42: !ruby/object:IPLocation
+    ip: 72.46.130.42
+    country: US
+    lat: 36.088
+    lng: -115.149
+  108.62.115.226: !ruby/object:IPLocation
+    ip: 108.62.115.226
+    country: US
+    lat: 33.675
+    lng: -111.952
+  96.31.66.245: !ruby/object:IPLocation
+    ip: 96.31.66.245
+    country: US
+    lat: 27.999
+    lng: -82.516
+  184.75.209.18: !ruby/object:IPLocation
+    ip: 184.75.209.18
+    country: CA
+    lat: 43.667
+    lng: -79.417
+  188.138.124.110: !ruby/object:IPLocation
+    ip: 188.138.124.110
+    country: DE
+    lat: 51
+    lng: 9
+  199.87.228.66: !ruby/object:IPLocation
+    ip: 199.87.228.66
+    country: US
+    lat: 45.517
+    lng: -122.681
+  94.46.240.121: !ruby/object:IPLocation
+    ip: 94.46.240.121
+    country: ES
+    lat: 40.4
+    lng: -3.684
+  94.247.174.83: !ruby/object:IPLocation
+    ip: 94.247.174.83
+    country: SE
+    lat: 56.898
+    lng: 12.502
+  178.255.153.2: !ruby/object:IPLocation
+    ip: 178.255.153.2
+    country: CH
+    lat: 47.367
+    lng: 8.55
+  54.194.212.120: !ruby/object:IPLocation
+    ip: 54.194.212.120
+    country: IE
+    lat: 53.333
+    lng: -6.249
+  52.24.109.194: !ruby/object:IPLocation
+    ip: 52.24.109.194
+    country: US
+    lat: 45.84
+    lng: -119.701
+  62.25.109.201: !ruby/object:IPLocation
+    ip: 62.25.109.201
+    country: GB
+    lat: 51.5
+    lng: -0.13
 observer_peers:
   !ruby/module 'Geolocation::Service': :update
 observer_state: true
