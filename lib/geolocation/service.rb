@@ -13,6 +13,7 @@ module Geolocation
         cache[ip] = result
         result
       end
+
     end
 
     def api_client

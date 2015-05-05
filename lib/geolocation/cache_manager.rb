@@ -8,15 +8,18 @@ module Geolocation
     CACHE_SIZE          = Settings.geolocation.cache_size
     CACHE_DUMP_INTERVAL = Settings.geolocation.cache_dump_interval
 
+    def cache
+      @cache ||= Cache.new(CACHE_SIZE)
+    end
+
     def start!
       load_cache!
-      
-      Thread.new do 
-        loop do
-          sleep CACHE_DUMP_INTERVAL
-          dump_cache
-        end
-      end
+      cache.add_observer(self)
+    end
+
+    def update
+      dump_cache if (Time.now - update_time) > CACHE_DUMP_INTERVAL 
+      @update_time = Time.now
     end
 
     def clear_cache!
@@ -43,8 +46,10 @@ module Geolocation
       self
     end
 
-    def cache
-      @cache ||= Cache.new(CACHE_SIZE)
+    private
+
+    def update_time
+      @update_time ||= Time.now
     end
   end
 end

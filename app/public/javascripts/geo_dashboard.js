@@ -177,6 +177,7 @@ $(document).ready( function() {
           strokeWeight: 6
         });
       });
+      
       map.fitZoom();
     });
   }

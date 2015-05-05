@@ -26,23 +26,6 @@ data:
     country: NL
     lat: 52.374
     lng: 4.89
-  94.46.240.121: !ruby/object:IPLocation
-    ip: 94.46.240.121
-    country: ES
-    lat: 40.4
-    lng: -3.684
-  94.247.174.83: !ruby/object:IPLocation
-    ip: 94.247.174.83
-    country: SE
-    lat: 56.898
-    lng: 12.502
-  108.62.115.226: !ruby/object:IPLocation
-    ip: 108.62.115.226
-    country: US
-    lat: 33.675
-    lng: -111.952
-  188.138.124.110: !ruby/object:IPLocation
-    ip: 188.138.124.110
-    country: DE
-    lat: 51
-    lng: 9
+observer_peers:
+  !ruby/module 'Geolocation::Service': :update
+observer_state: true

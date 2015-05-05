@@ -1,17 +1,13 @@
 require 'spec_helper'
 
 describe Geolocation::Service do
-  let(:location)   { double IPLocation                                                            }
-  let(:ip)         { '184.75.209.18'                                                              }
-  let(:service)    { Geolocation::Service                                                         }
-  let(:cache_file) { File.join(File.dirname(__FILE__), '../../', Settings.geolocation.cache_file) }
+  let(:location)   { double IPLocation      }
+  let(:ip)         { '184.75.209.18'        }
+  let(:service)    { Geolocation::Service   }
 
   before(:each) do
+    allow(service).to receive(:dump_cache)
     service.clear_cache!
-  end
-
-  after(:each) do
-    service.clear_dump!
   end
 
   context 'Calculating IP locations' do

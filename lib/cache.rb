@@ -1,6 +1,9 @@
 require 'yaml'
+require 'observer'
 
 class Cache
+  include Observable
+
   attr_reader :max_size
 
   def self.from_dumpfile(filepath)
@@ -22,6 +25,7 @@ class Cache
     @max_size = max_size
 
     @data.shift while @data.size > @max_size
+    notify_change
   end
 
   def [](key)
@@ -35,6 +39,8 @@ class Cache
     @data.delete(key)
     @data[key] = val
     @data.shift if @data.length > @max_size
+
+    notify_change
     val
   end
 
@@ -42,6 +48,9 @@ class Cache
     raise ArgumentError if data_h.size > @max_size
 
     data_h.each { |k, v| self[k] = v }
+    
+    notify_change
+    self
   end
 
   def dump_to_file(filepath)
@@ -57,15 +66,20 @@ class Cache
     @data.delete(key)
   end
 
-  def has_key?(key)
-    @data.has_key?(key)
-  end
-
   def clear!
     @data.clear
+    notify_change
+    self
   end
 
   def count
     @data.size
+  end
+
+  private
+
+  def notify_change
+    changed
+    notify_observers
   end
 end

@@ -62,7 +62,8 @@ describe Cache do
         "max_size: 3\n" +
         "data:\n" +
         "  :item_1: '1'\n" +
-        "  :item_2: '2'\n"
+        "  :item_2: '2'\n" +
+        "observer_state: false\n"
       )
     end
 
