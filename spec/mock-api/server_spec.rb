@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'net/http'
-require 'JSON'
+require 'json'
 
 describe MockApi::Server do
   context 'Hearbeat endpoint:' do
