@@ -3,7 +3,7 @@ require 'pry'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
-CodeClimate::TestReporter.start
+# CodeClimate::TestReporter.start
 
 Dir[File.join(__dir__, '../lib', '/*/*.rb')].each {|file| require file }
 require File.join(File.dirname(__FILE__), '../', 'app/sentinel.rb')

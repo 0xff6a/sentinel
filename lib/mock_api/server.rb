@@ -50,27 +50,14 @@ module MockApi
     # ===================================================================================
     
     get '/geolocation/:ip' do |ip|
-
-      unless ip && ip =~ /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
+      unless ip =~ /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
         status 400 
         body '[-] Bad IP provided'
       else
         @ip  = ip
-        @lat = random_lat
-        @lng = random_lng
 
         erb :'geolocation/api_response.json'
       end
-    end
-
-    private
-
-    def random_lat
-      (90 - rand * 180).round(2)
-    end
-
-    def random_lng
-      (180 - rand * 360).round(2)
     end
   end
 end

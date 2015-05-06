@@ -7,7 +7,7 @@
   "city":"",
   "zip_code":"",
   "time_zone":"XYZ",
-  "latitude":<%= @lat %>,
-  "longitude":<%= @lng %>,
+  "latitude":<%= (90 - rand * 180).round(2) %>,
+  "longitude":<%= (180 - rand * 360).round(2) %>,
   "metro_code":0
 }
