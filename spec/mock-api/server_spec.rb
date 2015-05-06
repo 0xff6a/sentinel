@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'net/http'
+require 'JSON'
 
 describe MockApi::Server do
   context 'Hearbeat endpoint:' do
@@ -12,9 +13,33 @@ describe MockApi::Server do
   end
 
   context 'Elastic search mock:' do
-    it 'should return random records with all fields'
+    it 'should return random records with all fields' do
+      res     = perform_get('/es/retrieve_all')
+      data    = JSON.parse(res.body)
+      records = LogData::Record.from_es_data(data)
 
-    it 'should return random records with selected fields'  
+      expect(records.count).to eq ES::MockRecordBuilder::DEFAULT_SIZE
+      expect(
+        records.all? { |r| 
+          r.fields['ip'] =~ /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/ &&
+          r.fields['method'] == 'GET'
+        } 
+      ).to be true
+    end
+
+    it 'should return random records with selected fields'  do
+      res     = perform_get('/es/retrieve_fields/ip')
+      data    = JSON.parse(res.body)
+      records = LogData::Record.from_es_data(data)
+
+      expect(records.count).to eq ES::MockRecordBuilder::DEFAULT_SIZE
+      expect(
+        records.all? { |r| 
+          r.fields['ip'] =~ /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/ &&
+          r.fields['method'] == nil
+        } 
+      ).to be true
+    end
   end
 
   context 'Geolocation mock:' do
